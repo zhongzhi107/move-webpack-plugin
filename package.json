@@ -1,0 +1,30 @@
+{
+  "name": "move-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Webpack plugin to move around files and directories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhongzhi107/move-webpack-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "move",
+    "files",
+    "folders"
+  ],
+  "author": "zhongzhi <zhong.zhi@163.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhongzhi107/move-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/zhongzhi107/move-webpack-plugin#readme",
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "packing-glob": "^1.0.1"
+  }
+}
