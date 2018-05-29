@@ -26,7 +26,6 @@ MoveWebpackPlugin.prototype.apply = function(compiler) {
 };
 
 MoveWebpackPlugin.prototype.doMove = function() {
-  console.log('====MoveWebpackPlugin');
   this.patterns.forEach(function(pattern) {
     var cwd = pattern.cwd ? (path.isAbsolute(pattern.cwd) ? pattern.cwd : path.resolve(process.cwd(), pattern.cwd)) : process.cwd();
     var src = pattern.src;
@@ -41,7 +40,7 @@ MoveWebpackPlugin.prototype.doMove = function() {
       }
       fs.renameSync(file, destFile);
 
-      console.log('[move] %s  ====> %s', file, destFile);
+      // console.log('[move] %s  ====> %s', file, destFile);
     });
 
   });
