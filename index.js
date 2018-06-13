@@ -6,21 +6,21 @@ var mkdirp = require('mkdirp');
 
 function MoveWebpackPlugin(patterns, when) {
   this.patterns = util.isArray(patterns) ? patterns : [patterns];
-  this.when = when || 'make';
+  this.when = when || 'beforeRun';
 }
 
 MoveWebpackPlugin.prototype.apply = function(compiler) {
   var self = this;
   var options = this.options;
 
-  if (this.when === 'make') {
+  if (this.when === 'beforeRun') {
     if (compiler.hooks) {
-      compiler.hooks.make.tap(this.constructor.name, function(compilation, callback) {
+      compiler.hooks.beforeRun.tapAsync(this.constructor.name, function(compiler, callback) {
         self.doMove();
         callback();
       });
     } else {
-      compiler.plugin('make', function(compilation, callback) {
+      compiler.plugin('beforeRun', function(compiler, callback) {
         self.doMove();
         callback();
       });
