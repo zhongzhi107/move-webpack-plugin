@@ -14,14 +14,27 @@ MoveWebpackPlugin.prototype.apply = function(compiler) {
   var options = this.options;
 
   if (this.when === 'make') {
-    compiler.plugin('make', function(compilation, callback) {
-      self.doMove();
-      callback();
-    });
+    if (compiler.hooks) {
+      compiler.hooks.make.tap(this.constructor.name, function(compilation, callback) {
+        self.doMove();
+        callback();
+      });
+    } else {
+      compiler.plugin('make', function(compilation, callback) {
+        self.doMove();
+        callback();
+      });
+    }
   } else {
-    compiler.plugin('done', function(state) {
-      self.doMove();
-    });
+    if (compiler.hooks) {
+      compiler.hooks.done.tap(this.constructor.name, function() {
+        self.doMove();
+      });
+    } else {
+      compiler.plugin('done', function() {
+        self.doMove();
+      });
+    }
   }
 };
 
@@ -39,10 +52,7 @@ MoveWebpackPlugin.prototype.doMove = function() {
         mkdirp.sync(destDir);
       }
       fs.renameSync(file, destFile);
-
-      // console.log('[move] %s  ====> %s', file, destFile);
     });
-
   });
 };
 
